@@ -1,5 +1,11 @@
 package model;
 
+
+
+
+
+
+// For company was used BuilderPater with inner class that build and pass data to to the main constructor
 public class Company {
 
     private String id;
@@ -7,8 +13,9 @@ public class Company {
     private int shares;
     private double price;
     private int priceCounter;
-    private int sharesSold;
+    private int sharesLeft;
     private boolean allSold;
+    private boolean soldThisRound;
 
 
     private Company(BuilderCompany builder) {
@@ -18,9 +25,9 @@ public class Company {
         this.shares = builder.shares;
         this.price = builder.price;
         this.priceCounter = builder.priceCounter;
-        this.sharesSold = builder.sharesSold;
+        this.sharesLeft = builder.sharesLeft;
         this.allSold = builder.allSold;
-
+        this.soldThisRound = builder.soldThisRound;
     }
 
     public String getId() {
@@ -43,8 +50,8 @@ public class Company {
         return priceCounter;
     }
 
-    public int getSharesSold() {
-        return sharesSold;
+    public int getSharesLeft() {
+        return sharesLeft;
     }
 
     public boolean isAllSold() {
@@ -58,8 +65,9 @@ public class Company {
         private int shares;
         private double price;
         private int priceCounter;
-        private int sharesSold;
+        private int sharesLeft;
         private boolean allSold;
+        private boolean soldThisRound;
 
         public BuilderCompany(String id, String name, int shares, double price) {
 
@@ -68,8 +76,14 @@ public class Company {
             this.shares = shares;
             this.price = price;
             this.priceCounter = 0;
-            this.sharesSold = 0;
+            this.sharesLeft = shares;
             this.allSold = false;
+            this.soldThisRound = false;
+        }
+
+        public BuilderCompany setThisRound(boolean round){
+            this.soldThisRound = round;
+            return this;
         }
 
         public BuilderCompany setPriceConter(int priceCounter){
@@ -84,7 +98,7 @@ public class Company {
         }
 
         public BuilderCompany setSold(int sold){
-            this.sharesSold = sold;
+            this.sharesLeft = sold;
             return this;
         }
 

@@ -2,6 +2,10 @@ package model;
 
 import java.util.ArrayList;
 
+
+
+
+//Investor was created as BuilderPattern as well with the same structure but has one arrayList where will be stored IDs of bought company shares
 public class Investor {
 
 
@@ -11,6 +15,7 @@ public class Investor {
     private int sharesBought;
     private ArrayList<String> companys = new ArrayList<String>();
     private boolean cantBuy;
+
 
 
     private Investor(BuilderInvestor builder) {
