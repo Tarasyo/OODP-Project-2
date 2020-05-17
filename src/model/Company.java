@@ -87,7 +87,7 @@ public class Company {
         this.allSold = allSold;
     }
 
-    public boolean isSoldThisRound() {
+    public boolean getSoldThisRound() {
         return soldThisRound;
     }
 

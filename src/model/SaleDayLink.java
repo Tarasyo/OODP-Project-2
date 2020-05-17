@@ -9,4 +9,5 @@ public interface SaleDayLink {
     void sales(ArrayList<Company> comp, ArrayList<Investor> invest, int i, int invIn);
 
 
+
 }
