@@ -14,6 +14,7 @@ public class Company {
     private double price;
     private int priceCounter;
     private int sharesLeft;
+    private int sharesSold;
     private boolean allSold;
     private boolean soldThisRound;
 
@@ -28,6 +29,15 @@ public class Company {
         this.sharesLeft = builder.sharesLeft;
         this.allSold = builder.allSold;
         this.soldThisRound = builder.soldThisRound;
+        this.sharesSold = builder.sharesSold;
+    }
+
+    public int getSharesSold() {
+        return sharesSold;
+    }
+
+    public boolean isSoldThisRound() {
+        return soldThisRound;
     }
 
     public String getId() {
@@ -68,6 +78,7 @@ public class Company {
         private int sharesLeft;
         private boolean allSold;
         private boolean soldThisRound;
+        private int sharesSold;
 
         public BuilderCompany(String id, String name, int shares, double price) {
 
@@ -79,6 +90,11 @@ public class Company {
             this.sharesLeft = shares;
             this.allSold = false;
             this.soldThisRound = false;
+            this.sharesSold = 0;
+        }
+        public BuilderCompany setSold(int sold){
+            this.sharesSold = sold;
+            return this;
         }
 
         public BuilderCompany setThisRound(boolean round){
@@ -97,7 +113,7 @@ public class Company {
                 return this;
         }
 
-        public BuilderCompany setSold(int sold){
+        public BuilderCompany setLeft(int sold){
             this.sharesLeft = sold;
             return this;
         }

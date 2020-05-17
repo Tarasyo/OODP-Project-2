@@ -1,20 +1,39 @@
 package controller;
 
+import model.*;
 import view.Menu;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 
 public class Controller {
 
     private DataCreator dataGen;
     private Menu menu;
 
+    private ArrayList<Company> companies;
+    private ArrayList<Investor> investors;
+    private int rounCounter = 0;
+
+
 
     public Controller(){
 
         dataGen = new DataCreator();
         menu = new Menu();
+
+        try {
+
+            companies = dataGen.getCompanies();
+            investors = dataGen.getInvestors();
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
 
         options();
 
@@ -49,6 +68,26 @@ public class Controller {
                 break;
         }
     }
+
+    public void salesDay(ArrayList<Company> comp, ArrayList<Investor> invest){
+
+        SaleDayLink d1 = new SaleDayStart();
+        SaleDayLink d2 = new SalesDayTen();
+
+        d1.setNextLink(d2);
+
+
+        while((dataGen.getTotalShares() != 0) || (dataGen.getMaxBudget() > dataGen.getMinPrice())) {
+            if(rounCounter == 11){
+                rounCounter = 0;
+            }
+
+            d1.sales(comp, invest, rounCounter);
+        }
+
+    }
+
+
 
     //method to exit from java machine
     public void  exit(){

@@ -13,7 +13,6 @@ public class Investor {
     private String name;
     private double budget;
     private int sharesBought;
-    private ArrayList<String> companys = new ArrayList<String>();
     private boolean cantBuy;
 
 
@@ -45,10 +44,6 @@ public class Investor {
         return sharesBought;
     }
 
-    public ArrayList<String> getCompanys() {
-        return companys;
-    }
-
     public boolean isCantBuy() {
         return cantBuy;
     }
@@ -60,7 +55,6 @@ public class Investor {
         private String name;
         private double budget;
         private int sharesBought;
-        private String companyId;
         private boolean cantBuy;
 
         public BuilderInvestor(String id, String name, double budget) {
@@ -80,10 +74,6 @@ public class Investor {
             return this;
         }
 
-        public BuilderInvestor setCompany(String companyId){
-            this.companyId = companyId;
-            return this;
-        }
 
         public BuilderInvestor setAllSold(boolean noMoney){
             this.cantBuy = noMoney;

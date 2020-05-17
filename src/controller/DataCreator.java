@@ -24,11 +24,11 @@ public class DataCreator {
 
 
 
-    //Method for creating data for 100 companies
+    //Method for creating data for 100 sales
    public  ArrayList<Company> getCompanies() throws IOException {
        ArrayList<Company> companies = new ArrayList<Company>();
 
-       //Read from file that holds data of 100 companies
+       //Read from file that holds data of 100 sales
         String fileName = "D:\\programing\\java\\OODP_CA2\\src\\controller\\companys.txt";
         File file = new File(fileName);
         FileReader fr = new FileReader(file);
@@ -85,7 +85,7 @@ public class DataCreator {
        return investors;
    }
 
-   //Method for creating uuid for companies and investors
+   //Method for creating uuid for sales and investors
     public static String getUuid(){
         String uuid = UUID.randomUUID().toString().replace("-", "");
         return uuid;

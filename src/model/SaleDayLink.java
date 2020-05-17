@@ -4,9 +4,9 @@ import java.util.ArrayList;
 
 public interface SaleDayLink {
 
-    void setNextLInk(SaleDayLink nextLink);
+    void setNextLink(SaleDayLink nextLink);
 
-    void companies(ArrayList<Company> comp);
+    void sales(ArrayList<Company> comp, ArrayList<Investor> invest, int i);
 
 
 }
