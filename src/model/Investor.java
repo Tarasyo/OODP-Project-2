@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 
 
-//Investor was created as BuilderPattern as well with the same structure but has one arrayList where will be stored IDs of bought company shares
+//Investor
 public class Investor {
 
 
@@ -17,15 +17,13 @@ public class Investor {
 
 
 
-    private Investor(BuilderInvestor builder) {
+    public Investor(String id, String name, double budget) {
 
-        this.id = builder.id;
-        this.name = builder.name;
-        this.budget = builder.budget;
-        this.sharesBought = builder.sharesBought;
-        this.cantBuy = builder.cantBuy;
-
-
+        this.id = id;
+        this.name = name;
+        this.budget = budget;
+        this.sharesBought = 0;
+        this.cantBuy = false;
     }
 
     public String getId() {
@@ -48,44 +46,25 @@ public class Investor {
         return cantBuy;
     }
 
-    public static class BuilderInvestor {
 
+    public void setId(String id) {
+        this.id = id;
+    }
 
-        private String id;
-        private String name;
-        private double budget;
-        private int sharesBought;
-        private boolean cantBuy;
+    public void setName(String name) {
+        this.name = name;
+    }
 
-        public BuilderInvestor(String id, String name, double budget) {
+    public void setBudget(double budget) {
+        this.budget = budget;
+    }
 
-            this.id = id;
-            this.name = name;
-            this.budget = budget;
-            this.sharesBought = 0;
-            this.cantBuy = false;
-        }
+    public void setSharesBought(int sharesBought) {
+        this.sharesBought = sharesBought;
+    }
 
-
-
-
-        public BuilderInvestor setShares(int shares){
-            this.sharesBought = shares;
-            return this;
-        }
-
-
-        public BuilderInvestor setAllSold(boolean noMoney){
-            this.cantBuy = noMoney;
-            return this;
-        }
-
-
-        public Investor build() {
-            return new Investor(this);
-        }
-
-
+    public void setCantBuy(boolean cantBuy) {
+        this.cantBuy = cantBuy;
     }
 
 

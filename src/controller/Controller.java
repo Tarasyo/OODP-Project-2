@@ -7,6 +7,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Controller {
 
@@ -16,6 +17,10 @@ public class Controller {
     private ArrayList<Company> companies;
     private ArrayList<Investor> investors;
     private int rounCounter = 0;
+
+    GlobalVar var = GlobalVar.getInstance();
+
+
 
 
 
@@ -34,6 +39,7 @@ public class Controller {
             e.printStackTrace();
         }
 
+        salesDay(companies, investors);
 
         options();
 
@@ -70,19 +76,21 @@ public class Controller {
     }
 
     public void salesDay(ArrayList<Company> comp, ArrayList<Investor> invest){
-
+        Random random = new Random();
         SaleDayLink d1 = new SaleDayStart();
         SaleDayLink d2 = new SalesDayTen();
 
         d1.setNextLink(d2);
 
-
-        while((dataGen.getTotalShares() != 0) || (dataGen.getMaxBudget() > dataGen.getMinPrice())) {
+        System.out.println(var.getTotalShares());
+        while((var.getTotalShares() != 0) || (var.getMaxBudget() > var.getMinPrice())) {
+            int investorIndex = random.nextInt(99);
             if(rounCounter == 11){
                 rounCounter = 0;
             }
 
-            d1.sales(comp, invest, rounCounter);
+            d1.sales(comp, invest, rounCounter, investorIndex);
+            rounCounter++;
         }
 
     }

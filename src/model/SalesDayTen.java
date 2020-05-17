@@ -12,7 +12,7 @@ public class SalesDayTen implements SaleDayLink {
     }
 
     @Override
-    public void sales(ArrayList<Company> comp, ArrayList<Investor> invest, int i) {
+    public void sales(ArrayList<Company> comp, ArrayList<Investor> invest, int i, int invIn) {
 
     }
 }

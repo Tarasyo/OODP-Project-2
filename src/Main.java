@@ -1,3 +1,4 @@
+import controller.Controller;
 import controller.DataCreator;
 import model.Company;
 import model.Investor;
@@ -12,6 +13,7 @@ public class Main {
     public static void main(String[] args) throws IOException {
 
 
+        Controller controller = new Controller();
 
 //    DataCreator cre = new DataCreator();
 //    cre.getCompanies();

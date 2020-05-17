@@ -1,6 +1,7 @@
 package controller;
 
 import model.Company;
+import model.GlobalVar;
 import model.Investor;
 
 import java.io.*;
@@ -13,16 +14,8 @@ import java.util.UUID;
 
 public class DataCreator {
 
-    //This variables will be used to check how many shares left and min cost of any share and max budget from all investors
-    //and the uuid of the company with min price
-    //In this case it will be possible to track when the sales date should to stop
 
-    private int totalShares = 0;
-    private double minPrice = 100;
-    private double maxBudget = 0;
-    private String uuidOfMinPrice;
-
-
+    GlobalVar var = GlobalVar.getInstance();
 
     //Method for creating data for 100 sales
    public  ArrayList<Company> getCompanies() throws IOException {
@@ -41,16 +34,15 @@ public class DataCreator {
 
             //declaring amd initialize new company object that by use of another methods generates data for the object and name from file
             //and pass it to the arrayList of company objects
-            Company.BuilderCompany builder =
-                    new Company.BuilderCompany(getUuid(), line, getRandomShares(), getRandomPrice());
-                    this.totalShares += builder.build().getShares();
+            Company company = new Company(getUuid(), line, getRandomShares(), getRandomPrice());
+                    var.setTotalShares(var.getTotalShares() + company.getShares());
 
-                    if(minPrice > builder.build().getPrice()){
-                        minPrice = builder.build().getPrice();
-                        uuidOfMinPrice = builder.build().getId();
+                    if(var.getMinPrice() > company.getPrice()){
+                        var.setMinPrice(company.getPrice());
+                        var.setUuidOfMinPrice(company.getId());
                     }
 
-            companies.add(builder.build());
+            companies.add(company);
         }
 
 
@@ -69,14 +61,14 @@ public class DataCreator {
 
        while((line = br.readLine()) != null){
 
-           Investor.BuilderInvestor builder =
-                   new Investor.BuilderInvestor(getUuid(), line, getRandomBudget());
+           Investor investor = new Investor(getUuid(), line, getRandomBudget());
 
-           if(maxBudget < builder.build().getBudget()){
-               maxBudget = builder.build().getBudget();
+           if(var.getMaxBudget() < investor.getBudget()){
+               var.setMaxBudget(investor.getBudget());
+               var.setUuidOfMaxBudget(investor.getId());
            }
 
-           investors.add(builder.build());
+           investors.add(investor);
 
        }
 
@@ -113,37 +105,6 @@ public class DataCreator {
         return randomDouble;
     }
 
-    public String getUuidOfMinPrice() {
-        return uuidOfMinPrice;
-    }
-
-    public void setUuidOfMinPrice(String uuidOfMinPrice) {
-        this.uuidOfMinPrice = uuidOfMinPrice;
-    }
-
-    public int getTotalShares() {
-        return totalShares;
-    }
-
-    public void setTotalShares(int totalShares) {
-        this.totalShares = totalShares;
-    }
-
-    public double getMinPrice() {
-        return minPrice;
-    }
-
-    public void setMinPrice(double minPrice) {
-        this.minPrice = minPrice;
-    }
-
-    public double getMaxBudget() {
-        return maxBudget;
-    }
-
-    public void setMaxBudget(double maxBudget) {
-        this.maxBudget = maxBudget;
-    }
 
 
 }
