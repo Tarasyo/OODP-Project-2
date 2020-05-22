@@ -12,7 +12,6 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
 
-
         Controller controller = new Controller();
 
 //    DataCreator cre = new DataCreator();
@@ -20,7 +19,7 @@ public class Main {
 //    cre.getInvestors();
 
 //        ArrayList<Company> creator = new DataCreator().getCompanies();
-
+//
 //        for(int i = 0; i < creator.size(); i++){
 //            System.out.println(creator.get(i).getId() + " "+ creator.get(i).getName() + " " + creator.get(i).getShares() + " " + creator.get(i).getPrice());
 //        }

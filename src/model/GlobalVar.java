@@ -13,7 +13,24 @@ public enum GlobalVar {
     private double maxBudget = 0;
     private String uuidOfMinPrice;
     private String uuidOfMaxBudget;
+    private int roundCounter = 0;
+    private boolean success;
 
+    public boolean isSuccess() {
+        return success;
+    }
+
+    public void setSuccess(boolean success) {
+        this.success = success;
+    }
+
+    public int getRoundCounter() {
+        return roundCounter;
+    }
+
+    public void setRoundCounter(int roundCounter) {
+        this.roundCounter = roundCounter;
+    }
 
     public String getUuidOfMaxBudget() {
         return uuidOfMaxBudget;

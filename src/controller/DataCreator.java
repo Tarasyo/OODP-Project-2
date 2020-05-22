@@ -95,16 +95,24 @@ public class DataCreator {
        double randomDouble = Math.random() * 100 + 10;
 
 
-       return randomDouble;
+       return round(randomDouble, 2);
     }
 
 
     public static double getRandomBudget(){
         double randomDouble = Math.random() * 10000 + 10;
 
-        return randomDouble;
+        return round(randomDouble, 2);
     }
 
+    //round double to 2 decimal places code taken from: https://stackoverflow.com/questions/2808535/round-a-double-to-2-decimal-places
+    public static double round(double value, int places) {
+        if (places < 0) throw new IllegalArgumentException();
 
+        long factor = (long) Math.pow(10, places);
+        value = value * factor;
+        long tmp = Math.round(value);
+        return (double) tmp / factor;
+    }
 
 }

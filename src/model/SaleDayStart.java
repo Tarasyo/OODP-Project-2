@@ -3,14 +3,17 @@ package model;
 import controller.Controller;
 import controller.DataCreator;
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Random;
 
 public class SaleDayStart implements SaleDayLink {
 
     private SaleDayLink nextChain;
-    boolean success = false;
+
     GlobalVar var = GlobalVar.getInstance();
+    DataCreator creator = new DataCreator();
+
 
     @Override
     public void setNextLink(SaleDayLink nextLink) {
@@ -18,52 +21,82 @@ public class SaleDayStart implements SaleDayLink {
     }
 
     @Override
-    public void sales(ArrayList<Company> comp, ArrayList<Investor> invest, int i, int invIndex) {
-
-        if(i == 10){
-            nextChain.sales(comp, invest, i, invIndex);
+    public void sales(ArrayList<Company> comp, ArrayList<Investor> invest, int invIndex) {
+        var.setSuccess(false);
+        if(var.getRoundCounter() == 10){
+            nextChain.sales(comp, invest, invIndex);
         }
         Random random = new Random();
 
         int invIn = invIndex;
-        int compIn = random.nextInt(99);
+        int compIn = random.nextInt(100);
 
-        if((invest.get(invIn).isCantBuy() != true) &&
-                (invest.get(invIn).getBudget() >= comp.get(compIn).getPrice() &&
-                        comp.get(compIn).isAllSold() != true )){
+        if((!invest.get(invIn).isCantBuy()) &&
+                (invest.get(invIn).getBudget() >= comp.get(compIn).getPrice()) &&
+                        (!comp.get(compIn).isAllSold())){
 
                 operation(comp, invest, invIn, compIn);
         }else{
-            for(int j = compIn +1; j == compIn; j++){
-                if(j > 99){
-                    j = 0;
-                }
-
-                if((invest.get(invIn).isCantBuy() != true) &&
-                        (invest.get(invIn).getBudget() >= comp.get(j).getPrice() &&
-                                comp.get(j).isAllSold() != true )){
+            int j = compIn + 1;
+            if(compIn == 99){
+                j = 0;
+            }
+            loop:
+            while(j != (compIn)){
+//                System.out.println("I am here: " + j);
+//                System.out.println(compIn);
+                if((!invest.get(invIn).isCantBuy()) &&
+                        (invest.get(invIn).getBudget() >= comp.get(j).getPrice()) &&
+                        (!comp.get(j).isAllSold())){
                     operation(comp, invest, invIn, j);
-                    break;
+                    break loop;
                 }
+                if(j == 99){
+                    j = -1;
+                }
+                j++;
 
             }
         }
-            if(success == false){
-                sales(comp,  invest, i, (invIndex + 1));
+
+            int count = invIn +1;
+            if(invIn == 99){
+                count = 0;
+            }
+            if(!var.isSuccess()){
+                while(invest.get(count).isCantBuy()){
+                    System.out.println(invest.get(count).isCantBuy());
+
+                    if(count == 99){
+                        count = -1;
+                    }
+                    count++;
+
+                }
+                System.out.println(count);
+                sales(comp,  invest, count);
             }
 
-
+        System.out.println("end");
     }
 
 
     public void operation(ArrayList<Company> comp, ArrayList<Investor> invest, int invIn, int compIn){
+        var.setRoundCounter(var.getRoundCounter() + 1);
+        double oldBudget = invest.get(invIn).getBudget();
+        double oldPrice = comp.get(compIn).getPrice();
+       // System.out.println(invest.get(invIn).getBudget());
+//        System.out.println(var.getTotalShares());
+//        System.out.print(var.getMaxBudget()+ "==");
+//        System.out.println(var.getMinPrice());
 
-        invest.get(invIn).setBudget(invest.get(invIn).getBudget() - comp.get(compIn).getPrice());
-        if(var.getUuidOfMaxBudget() == invest.get(invIn).getId()){
+        invest.get(invIn).setBudget(creator.round((invest.get(invIn).getBudget() - comp.get(compIn).getPrice()),4));
+       // System.out.println(invest.get(invIn).getBudget());
+        if(var.getMaxBudget() == oldBudget){
+            var.setMaxBudget(0);
             for(int i = 0; i < invest.size(); i++){
                 if(var.getMaxBudget() < invest.get(i).getBudget()){
                     var.setMaxBudget(invest.get(i).getBudget());
-                    var.setUuidOfMaxBudget(invest.get(i).getId());
                 }
             }
         }
@@ -73,29 +106,34 @@ public class SaleDayStart implements SaleDayLink {
         comp.get(compIn).setSoldThisRound(true);
         comp.get(compIn).setSharesLeft(comp.get(compIn).getSharesLeft() -1);
         var.setTotalShares(var.getTotalShares() - 1);
-        System.out.println(var.getTotalShares());
 
         if(comp.get(compIn).getSharesLeft() == 0){
             comp.get(compIn).setAllSold(true);
         }
 
 
-
+        //System.out.println(comp.get(compIn).getPrice());
         comp.get(compIn).setPriceCounter(comp.get(compIn).getPriceCounter() +1);
 
         if(comp.get(compIn).getPriceCounter() == 10){
             comp.get(compIn).setPriceCounter(0);
-            comp.get(compIn).setPrice(comp.get(compIn).getPrice() * 2);
-            if(var.getUuidOfMinPrice() == comp.get(compIn).getId()){
+            comp.get(compIn).setPrice(creator.round((comp.get(compIn).getPrice() * 2), 4));
+
+            //System.out.println(comp.get(compIn).getPrice());
+            if(var.getMinPrice() == oldPrice){
                 for(int i = 0; i < comp.size(); i++){
                     if(var.getMinPrice() > comp.get(i).getPrice()){
                         var.setMinPrice(comp.get(i).getPrice());
-                        var.setUuidOfMinPrice(comp.get(i).getId());
                     }
                 }
             }
         }
-        success = true;
+
+        if(invest.get(invIn).getBudget() < var.getMinPrice()){
+            invest.get(invIn).setCantBuy(true);
+        }
+
+        var.setSuccess(true);
 
     }
 }
