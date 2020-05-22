@@ -5,16 +5,20 @@ package model;
 
 
 
-//
+//Company class with all setters and getters
+//It was created more variables in investor object and company for faster check and safer check of condition
 public class Company {
 
     private String id;
     private String name;
     private int shares;
     private double price;
+    //priceCounter will add plus one until it will be 10 and price will double
     private int priceCounter;
+    //minus one share after each transaction if it 0, boolean allSold set to true
     private int sharesLeft;
     private boolean allSold;
+    //boolean if in fresh 10 rounds this company sel some shears will set to true
     private boolean soldThisRound;
 
 

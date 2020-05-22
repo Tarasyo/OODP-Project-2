@@ -4,6 +4,8 @@ import controller.DataCreator;
 
 import java.util.ArrayList;
 
+
+//Investor Iterator created in same structure as Company Iterator and as well can check all highest and lowest shares of Investors
 public class IvestorIterator implements InvestorIteratorInterface {
 
     ArrayList<Investor> investors;

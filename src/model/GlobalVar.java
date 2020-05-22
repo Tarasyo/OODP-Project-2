@@ -1,11 +1,16 @@
 package model;
 
+
+
+//This is Enum singleton I use it to have one global instance of this variables
+//and any changes will be the same for all
 public enum GlobalVar {
     instance;
 
 
     //This variables will be used to check how many shares left and min cost of any share and max budget from all investors
-    //and the uuid of the company with min price
+    //and  how many rounds left to reduce the price
+    //Success  variable will be used to check if share was already bought
     //In this case it will be possible to track when the sales date should to stop
 
     private int totalShares = 0;

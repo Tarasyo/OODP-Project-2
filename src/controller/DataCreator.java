@@ -106,6 +106,7 @@ public class DataCreator {
     }
 
     //round double to 2 decimal places code taken from: https://stackoverflow.com/questions/2808535/round-a-double-to-2-decimal-places
+    //will be used in all places where will be manipulation with doubles to keep it simple and keep it to 2 decimal points
     public static double round(double value, int places) {
         if (places < 0) throw new IllegalArgumentException();
 

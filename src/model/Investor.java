@@ -5,7 +5,9 @@ import java.util.ArrayList;
 
 
 
-//Investor
+//Investor class with all setters and getters
+//It was created more variables in investor object and company for faster check and safer check of condition
+//Like boolean cantBuy: in some point it will set to true what will mean that he cant buy more shears
 public class Investor {
 
 
