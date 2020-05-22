@@ -43,8 +43,7 @@ public class SaleDayStart implements SaleDayLink {
             }
             loop:
             while(j != (compIn)){
-//                System.out.println("I am here: " + j);
-//                System.out.println(compIn);
+
                 if((!invest.get(invIn).isCantBuy()) &&
                         (invest.get(invIn).getBudget() >= comp.get(j).getPrice()) &&
                         (!comp.get(j).isAllSold())){
@@ -65,7 +64,7 @@ public class SaleDayStart implements SaleDayLink {
             }
             if(!var.isSuccess()){
                 while(invest.get(count).isCantBuy()){
-                    System.out.println(invest.get(count).isCantBuy());
+
 
                     if(count == 99){
                         count = -1;
@@ -73,11 +72,11 @@ public class SaleDayStart implements SaleDayLink {
                     count++;
 
                 }
-                System.out.println(count);
+
                 sales(comp,  invest, count);
             }
 
-        System.out.println("end");
+
     }
 
 
@@ -85,13 +84,10 @@ public class SaleDayStart implements SaleDayLink {
         var.setRoundCounter(var.getRoundCounter() + 1);
         double oldBudget = invest.get(invIn).getBudget();
         double oldPrice = comp.get(compIn).getPrice();
-       // System.out.println(invest.get(invIn).getBudget());
-//        System.out.println(var.getTotalShares());
-//        System.out.print(var.getMaxBudget()+ "==");
-//        System.out.println(var.getMinPrice());
+
 
         invest.get(invIn).setBudget(creator.round((invest.get(invIn).getBudget() - comp.get(compIn).getPrice()),4));
-       // System.out.println(invest.get(invIn).getBudget());
+
         if(var.getMaxBudget() == oldBudget){
             var.setMaxBudget(0);
             for(int i = 0; i < invest.size(); i++){
@@ -112,14 +108,14 @@ public class SaleDayStart implements SaleDayLink {
         }
 
 
-        //System.out.println(comp.get(compIn).getPrice());
+
         comp.get(compIn).setPriceCounter(comp.get(compIn).getPriceCounter() +1);
 
         if(comp.get(compIn).getPriceCounter() == 10){
             comp.get(compIn).setPriceCounter(0);
             comp.get(compIn).setPrice(creator.round((comp.get(compIn).getPrice() * 2), 4));
 
-            //System.out.println(comp.get(compIn).getPrice());
+
             if(var.getMinPrice() == oldPrice){
                 for(int i = 0; i < comp.size(); i++){
                     if(var.getMinPrice() > comp.get(i).getPrice()){

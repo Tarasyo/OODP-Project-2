@@ -37,7 +37,7 @@ public class Controller {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        //cout();
+
         salesDay(companies, investors);
 
         menu = new Menu();
@@ -97,29 +97,23 @@ public class Controller {
         SaleDayLink d2 = new SalesDayTen();
 
            d1.setNextLink(d2);
-//        for(int io =0; io < investors.size(); io++){
-//            System.out.println(investors.get(io).getBudget());
-//        }
+
 
         while((var.getTotalShares() == 0) || (var.getMaxBudget() > var.getMinPrice())) {
-//        System.out.println(var.getTotalShares());
-//            System.out.print(var.getMaxBudget()+ "==");
-//            System.out.println(var.getMinPrice());
+
 
             int investorIndex = random.nextInt(100);
             if(var.getRoundCounter() == 11){
                 var.setRoundCounter(0);
             }
             d1.sales(comp, invest, investorIndex);
+       //     System.out.println("Loading......");
 
         }
 
         companies = comp;
         investors = invest;
 
-//        for(int io = 0; io < companies.size(); io++){
-//            System.out.println(companies.get(io).getPrice());
-//        }
 
     }
 
