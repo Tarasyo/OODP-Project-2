@@ -86,7 +86,7 @@ public class SaleDayStart implements SaleDayLink {
         double oldPrice = comp.get(compIn).getPrice();
 
 
-        invest.get(invIn).setBudget(creator.round((invest.get(invIn).getBudget() - comp.get(compIn).getPrice()),4));
+        invest.get(invIn).setBudget(creator.round((invest.get(invIn).getBudget() - comp.get(compIn).getPrice()),2));
 
         if(var.getMaxBudget() == oldBudget){
             var.setMaxBudget(0);
@@ -113,7 +113,7 @@ public class SaleDayStart implements SaleDayLink {
 
         if(comp.get(compIn).getPriceCounter() == 10){
             comp.get(compIn).setPriceCounter(0);
-            comp.get(compIn).setPrice(creator.round((comp.get(compIn).getPrice() * 2), 4));
+            comp.get(compIn).setPrice(creator.round((comp.get(compIn).getPrice() * 2), 2));
 
 
             if(var.getMinPrice() == oldPrice){

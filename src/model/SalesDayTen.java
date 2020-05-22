@@ -22,7 +22,7 @@ public class SalesDayTen implements SaleDayLink {
 
         for(int j = 0; j < comp.size(); j++){
             if(!comp.get(j).getSoldThisRound()){
-                comp.get(j).setPrice(creator.round((comp.get(j).getPrice() * 0.98), 4));
+                comp.get(j).setPrice(creator.round((comp.get(j).getPrice() * 0.98), 2));
             }else{
                 comp.get(j).setSoldThisRound(false);
             }

@@ -1,16 +1,17 @@
 package model;
 
+import controller.DataCreator;
+
 import java.util.ArrayList;
 
 public class CompanyIterator implements CompanyIteratorInterface {
 
-    FilterType type;
+    DataCreator creator = new DataCreator();
     ArrayList<Company> companies;
-    int filterNumber;
+    double filterNumber;
     int position;
 
-    public CompanyIterator(FilterType type, ArrayList<Company> companies, int filterNumber){
-        this.type = type;
+    public CompanyIterator(ArrayList<Company> companies, double filterNumber){
         this.companies = companies;
         this.filterNumber = filterNumber;
         this.position = 0;
@@ -20,16 +21,26 @@ public class CompanyIterator implements CompanyIteratorInterface {
 
     @Override
     public boolean hasNext() {
-        if(this.type == FilterType.HIGHEST){
+            Company c = null;
 
-        }
+            while(position < companies.size()){
+                c = companies.get(position);
+                double capital = creator.round((c.getPrice() * c.getShares()), 4);
 
+                if(capital == filterNumber){
+                    return true;
+                }else {
+                    position++;
+                }
+            }
+            return false;
 
-        return false;
     }
 
     @Override
     public Company next() {
-        return null;
+        Company c = companies.get(position);
+        position++;
+        return c;
     }
 }
