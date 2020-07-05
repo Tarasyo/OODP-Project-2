@@ -1,4 +1,4 @@
-## Assignment Introduction
+## Project Introduction
 
 The task to design and implement a simulator of a simplified model of a stock market.
 The program is going to simulate both companies and investors, following the specific requirements described below.
