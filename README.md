@@ -1,7 +1,3 @@
-# OODP_CA2
-Project Title
-
-CCT College Dublin Object Orientation Design Patterns CA2. Strudent: Taras Boreyko Teacher: Amilcar Aponte
 ## Assignment Introduction
 
 The task to design and implement a simulator of a simplified model of a stock market.
